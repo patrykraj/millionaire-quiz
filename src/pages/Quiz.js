@@ -13,7 +13,7 @@ import "../styles/Quiz.css";
 
 const Quiz = () => {
   return (
-    <BrowserRouter basename={"/millionaire-quiz"}>
+    <BrowserRouter>
       <div className="App">
         <Switch>
           <Route path="/" exact component={Home} />

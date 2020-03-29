@@ -2,10 +2,11 @@ ul.menu--links {
   position: relative;
   flex-grow: 1;
   padding: 0;
-  margin: 0;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   background-color: rgba(0, 0, 0, 0.2);
+  max-width: 900px;
 }
 
 ul.menu--links .link {
@@ -21,4 +22,10 @@ ul.menu--links .link {
 ul.menu--links .link:hover {
   background-color: crimson;
   transform: scale(1.1);
+}
+
+@media (max-width: 900px) {
+  ul.menu--links {
+    overflow: hidden;
+  }
 }

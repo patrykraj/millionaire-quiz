@@ -48,6 +48,13 @@ form.player--form span.invalid--input {
   color: crimson;
 }
 
+@media (max-width: 500px) {
+  form.player--form span.invalid--input {
+    position: relative;
+    display: block;
+  }
+}
+
 @media (max-width: 400px) {
   div.player--container {
     align-items: initial;
@@ -55,10 +62,5 @@ form.player--form span.invalid--input {
 
   form.player--form {
     margin-top: calc(50vh - 30%);
-  }
-
-  form.player--form span.invalid--input {
-    position: relative;
-    display: block;
   }
 }

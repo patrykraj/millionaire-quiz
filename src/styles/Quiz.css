@@ -91,4 +91,13 @@ article.about--game h2 {
   .App {
     height: 100%;
   }
+
+  div.page-container {
+    width: 100%;
+  }
+
+  article.about--game {
+    padding: 0.5rem;
+    font-size: 1rem;
+  }
 }

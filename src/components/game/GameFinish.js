@@ -31,7 +31,7 @@ const GameFinish = props => {
           </button>
         </div>
         <div className="answer--box">
-          <a href="/">
+          <a href={process.env.PUBLIC_URL}>
             <button className="answer quest">No</button>
           </a>
         </div>

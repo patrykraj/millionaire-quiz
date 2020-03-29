@@ -35,4 +35,9 @@ div.resultBoard ul.resultBoard--list li.result span.result--number {
   div.resultBoard {
     margin-left: 0;
   }
+
+  div.resultBoard ul.resultBoard--list li.result {
+    font-size: 1.1rem;
+    padding: 0 5px;
+  }
 }

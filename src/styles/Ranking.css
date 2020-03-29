@@ -1,6 +1,6 @@
 div.ranking--container ul.ranking {
   min-height: 500px;
-  min-width: 500px;
+  width: 500px;
   list-style: none;
   padding: 0;
   text-align: center;
@@ -19,4 +19,20 @@ div.ranking--container ul.ranking li {
 div.ranking--container ul.ranking li span {
   position: absolute;
   left: 2rem;
+}
+
+@media (max-width: 750px) {
+  div.page-container.ranking--container {
+    width: 100%;
+  }
+
+  div.ranking--container ul.ranking {
+    width: 90%;
+    font-size: 1.6rem;
+    min-height: 450px;
+  }
+
+  div.ranking--container ul.ranking li span {
+    left: 1rem;
+  }
 }

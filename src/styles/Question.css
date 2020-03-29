@@ -1,0 +1,47 @@
+.quest {
+  text-align: center;
+  padding: 1rem 1rem;
+  width: 100%;
+  border-radius: 20px;
+  background-color: #111;
+  color: #efefef;
+  font-size: 1rem;
+  margin: 0.5rem 0;
+  border: 2px solid silver;
+  transition: 0.2s all;
+}
+
+div.answer--row {
+  display: flex;
+}
+
+div.answer--box {
+  flex: 1;
+}
+
+div.answer--box button.selected--answer {
+  background-color: orange;
+}
+
+div.answer--box button.answer:hover {
+  background-color: orange;
+  cursor: pointer;
+}
+
+div.answer--box button.correct--answer {
+  background-color: #2ecc71;
+}
+
+div.answer--box button.answer {
+  text-align: left;
+}
+
+div.answer--box button.answer span.text__orange {
+  color: gold;
+}
+
+@media (max-width: 600px) {
+  div.answer--row {
+    display: block;
+  }
+}

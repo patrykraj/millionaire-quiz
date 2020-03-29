@@ -1,0 +1,70 @@
+div.loader {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 100;
+  background-color: var(--main-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+div.loader div.bubble--container {
+  position: relative;
+  transform: translateY(10%);
+}
+
+div.loader div.bubble--container div.bubble--loader {
+  position: relative;
+  margin: 0.5rem;
+  width: 80px;
+  height: 80px;
+  display: block;
+  background-color: #efefef;
+  border-radius: 50%;
+  animation: load 1.5s infinite linear;
+}
+
+div.loader div.bubble--container div.bubble--loader:nth-child(2) {
+  top: 10px;
+  left: 20px;
+  width: 50px;
+  height: 50px;
+  animation: loadgrow 1.8s infinite linear;
+}
+
+div.loader div.bubble--container div.bubble--loader:nth-child(3) {
+  top: -120px;
+  left: -80px;
+  animation: load 1.2s infinite linear;
+}
+
+@keyframes load {
+  50% {
+    transform: scale(0.5);
+  }
+}
+
+@keyframes loadgrow {
+  50% {
+    transform: scale(1.6);
+  }
+}
+
+@media (max-width: 900px) {
+  div.loader div.bubble--container {
+    transform: translate(30px, 5%);
+  }
+}
+
+@media (max-width: 400px) {
+  div.loader {
+    align-items: unset;
+  }
+
+  div.loader div.bubble--container {
+    margin-top: calc(50vh - 30%);
+  }
+}

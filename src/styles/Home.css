@@ -1,0 +1,22 @@
+.homePage {
+  text-align: center;
+  height: 100vh;
+  max-width: 968px;
+  min-height: 800px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+header.header h1 {
+  font-size: 3rem;
+  margin: 3rem 0 0;
+}
+
+@media (max-width: 900px) {
+  .homePage {
+    min-width: 300px;
+    min-height: 600px;
+  }
+}

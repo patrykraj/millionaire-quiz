@@ -1,0 +1,58 @@
+div.player--container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  background-color: var(--main-color);
+  z-index: 10;
+}
+
+form.player--form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 1rem;
+  text-align: center;
+}
+
+form.player--form > * {
+  margin: 1rem 0;
+}
+
+form.player--form div.input--container {
+  position: relative;
+}
+
+form.player--form label.player--label {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+form.player--form input.player--input {
+  font-size: 1.1rem;
+  padding: 0.5rem 0.3rem;
+  margin-right: 1rem;
+  border: 2px solid transparent;
+  transition: 0.3s all;
+}
+
+form.player--form span.invalid--input {
+  position: absolute;
+  top: 25%;
+  margin: 0;
+  font-weight: bold;
+  letter-spacing: 1px;
+  color: crimson;
+}
+
+@media (max-width: 400px) {
+  div.player--container {
+    align-items: initial;
+  }
+
+  form.player--form {
+    margin-top: calc(50vh - 30%);
+  }
+}

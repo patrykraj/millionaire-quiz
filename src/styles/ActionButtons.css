@@ -1,0 +1,62 @@
+div.quiz--container div.buttons--container {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  overflow: hidden;
+}
+
+div.quiz--container button.quit--btn {
+  position: relative;
+  align-self: flex-start;
+  top: 0;
+  left: 0;
+  margin-bottom: 1rem;
+  background-color: transparent;
+  border: 2px solid #efefef;
+  border-radius: 25px;
+  padding: 0.3rem 1.5rem;
+  color: #efefef;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+div.quiz--container button.quit--btn:hover {
+  background-color: rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 10px black;
+}
+
+div.quiz--container button.quit--btn span.material-icons {
+  transform: rotate(-180deg);
+  font-size: 2rem;
+}
+
+div.quiz--container button.toggle--lifelines {
+  display: none;
+}
+
+div.quiz--container button.toggle--lifelines span.material-icons {
+  font-size: 2.5rem;
+}
+
+@media (max-width: 750px) {
+  div.quiz--container button.toggle--lifelines {
+    display: block;
+    position: relative;
+    top: 0;
+    right: 0;
+    margin-bottom: 1rem;
+    background-color: transparent;
+    border: none;
+    color: #efefef;
+    cursor: pointer;
+    transition: all 0.7s;
+  }
+
+  .active--lifelines__btn {
+    transform: rotate(360deg);
+  }
+
+  div.quiz--container button.toggle--lifelines:focus {
+    outline: none;
+  }
+}

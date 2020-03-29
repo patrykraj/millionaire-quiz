@@ -1,0 +1,107 @@
+div.quiz--container {
+  position: relative;
+  max-width: 968px;
+  min-width: 900px;
+  min-height: 100vh;
+  margin: 0 auto;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+div.game {
+  width: 100%;
+  margin: 1rem;
+  position: relative;
+  text-align: center;
+}
+
+div.game div.game--interface {
+  display: flex;
+}
+
+div.fullscreen {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  z-index: 3;
+  background: transparent;
+}
+
+div.fullscreen {
+  background: rgba(0, 0, 0, 0.5);
+  width: 100vw;
+}
+
+div.fullscreen > * {
+  width: 33%;
+  margin: 0 auto;
+}
+
+div.game div.board {
+  flex: 1;
+  background-color: #111;
+  border: 2px solid silver;
+  width: 100%;
+  margin: 1rem 0;
+  padding: 1rem;
+}
+
+div.game div.board:nth-child(1) {
+  margin-right: 1rem;
+}
+
+div.game div.board:nth-child(2) {
+  margin-left: 1rem;
+}
+
+div.game button.disabled--btn:hover {
+  background-color: #111;
+  cursor: default;
+}
+
+div.game button.disabled--btn:focus {
+  outline: none;
+}
+
+@media (max-width: 900px) {
+  div.quiz--container {
+    min-width: 600px;
+    height: 100%;
+  }
+}
+
+@media (max-width: 750px) {
+  div.quiz--container {
+    flex-direction: column;
+    padding: 1rem 0.3rem;
+    min-width: 200px;
+    height: auto;
+  }
+
+  div.fullscreen {
+    background: rgba(0, 0, 0, 0.5);
+  }
+
+  div.fullscreen > * {
+    width: 100%;
+  }
+
+  div.game {
+    margin: 1rem 0;
+  }
+
+  div.game div.board:nth-child(1),
+  div.game div.board:nth-child(2) {
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  div.game div.board {
+    height: 372px;
+  }
+}

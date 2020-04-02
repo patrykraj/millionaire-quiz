@@ -110,12 +110,6 @@ article.about--game h2 {
   .App {
     min-width: 300px;
   }
-
-  .fade-appear,
-  .fade-enter {
-    transform: translateX(-100%);
-    z-index: 1;
-  }
 }
 
 @media (max-width: 750px) {

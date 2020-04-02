@@ -98,11 +98,11 @@ article.about--game h2 {
 }
 
 .fade-exit {
-  opacity: 1;
+  transform: scale(1);
 }
 
 .fade-exit.fade-exit-active {
-  opacity: 0;
+  transform: scale(1.1);
   transition: transform 1050ms linear;
 }
 

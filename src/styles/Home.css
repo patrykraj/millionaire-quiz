@@ -9,14 +9,25 @@
   justify-content: space-between;
 }
 
+header.header {
+  border-bottom: 2px solid;
+}
+
 header.header h1 {
   font-size: 3rem;
-  margin: 3rem 0 0;
+  font-family: Copperplate Gothic;
+  margin: 2rem 0;
 }
 
 @media (max-width: 900px) {
   .homePage {
     min-width: 300px;
     min-height: 600px;
+  }
+}
+
+@media (max-width: 450px) {
+  header.header h1 {
+    font-size: 2rem;
   }
 }

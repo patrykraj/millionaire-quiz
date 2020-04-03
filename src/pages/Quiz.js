@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router } from "react-router-dom";
 import { Switch, Route } from "react-router-dom";
-import { TransitionGroup, CSSTransition } from "react-transition-group";
+// import { TransitionGroup, CSSTransition } from "react-transition-group";
 
 import Home from "./Home";
 import Game from "./Game";
@@ -27,22 +27,14 @@ const Quiz = () => {
   return (
     <div className="App">
       <Router basename={process.env.PUBLIC_URL}>
-        <Route
-          render={({ location }) => (
-            <TransitionGroup>
-              <CSSTransition key={location.key} timeout={450} classNames="fade">
-                <Switch location={location}>
-                  <Route path="/" exact component={Home} />
-                  <Route path="/game" component={Game} />
-                  <Route path="/ranking" component={Ranking} />
-                  <Route path="/about" component={About} />
-                  <Route path="/contact" component={Contact} />
-                  <Route component={Error} />
-                </Switch>
-              </CSSTransition>
-            </TransitionGroup>
-          )}
-        />
+        <Switch>
+          <Route path="/" exact component={Home} />
+          <Route path="/game" component={Game} />
+          <Route path="/ranking" component={Ranking} />
+          <Route path="/about" component={About} />
+          <Route path="/contact" component={Contact} />
+          <Route component={Error} />
+        </Switch>
       </Router>
     </div>
   );

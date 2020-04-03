@@ -271,6 +271,7 @@ class Game extends Component {
           questionNumber: state.questionNumber + 1,
           correctAnswer: data.results[0].correct_answer,
           answers,
+          lifelinesVisible: false,
           confirmed: false,
           loading: false,
           selectedAnswer: "",

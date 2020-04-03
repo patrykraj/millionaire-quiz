@@ -154,7 +154,7 @@ div.lifelines--container
   div.lifelines--container {
     position: absolute;
     transform: translateX(calc(-100% - 2rem));
-    transition: 1s all;
+    transition: 0.9s all;
     z-index: 1;
   }
 

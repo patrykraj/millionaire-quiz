@@ -3,12 +3,12 @@ import { BrowserRouter as Router } from "react-router-dom";
 import { Switch, Route } from "react-router-dom";
 // import { TransitionGroup, CSSTransition } from "react-transition-group";
 
-import Home from "./Home";
-import Game from "./Game";
-import Ranking from "./Ranking";
-import About from "./About";
-import Contact from "./Contact";
-import Error from "./Error";
+import Home from "./Home.jsx";
+import Game from "./Game.jsx";
+import Ranking from "./Ranking.jsx";
+import About from "./About.jsx";
+import Contact from "./Contact.jsx";
+import Error from "./Error.jsx";
 import "../styles/Quiz.css";
 
 const Quiz = () => {
@@ -19,7 +19,7 @@ const Quiz = () => {
     let vh = window.innerHeight * 0.01;
     document.documentElement.style.setProperty("--vh", `${vh}px`);
   });
-  window.addEventListener("orientationchange", function() {
+  window.addEventListener("orientationchange", function () {
     let vh = window.innerHeight * 0.01;
     document.documentElement.style.setProperty("--vh", `${vh}px`);
   });

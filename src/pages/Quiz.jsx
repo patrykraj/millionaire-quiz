@@ -1,7 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router } from "react-router-dom";
 import { Switch, Route } from "react-router-dom";
-// import { TransitionGroup, CSSTransition } from "react-transition-group";
 
 import Home from "./Home.jsx";
 import Game from "./Game.jsx";

@@ -1,0 +1,4 @@
+public/*.html linguist-vendor
+scot-ui/public/*.html linguist-vendor
+public/* linguist-generated
+scot-ui/public/* linguist-generated

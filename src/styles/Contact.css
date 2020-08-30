@@ -4,35 +4,34 @@ div.contact--container.page-container {
 
 div.contact--container.page-container h2.contact-header {
   font-size: 2rem;
+  text-align: center;
 }
 
-div.contact--container form.contact-form > * {
-  display: block;
-  margin: 1rem auto;
+div.contact--container .contact-links-container {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  flex-flow: column;
+  max-width: 247px;
+  margin: 2rem auto;
+  padding: 0;
 }
 
-div.contact--container form.contact-form textarea.message {
-  width: 400px;
-  height: 200px;
-  resize: none;
-  font-size: 1.3rem;
+div.contact--container .contact-link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: white;
+  font-size: 1.1rem;
+  margin: 0.7rem 0;
 }
 
-div.contact--container form.contact-form input.contact-email {
-  font-size: 1.2rem;
-  padding: 0.4rem;
-}
-
-div.contact--container form.contact-form button.submit--message__btn {
-  margin-top: 2rem;
+div.contact--container span {
+  display: flex;
+  align-items: center;
+  font-size: 2rem;
+  margin-right: 1rem;
 }
 
 @media (max-width: 750px) {
-  div.contact--container form.contact-form {
-    width: 100%;
-  }
-
-  div.contact--container form.contact-form textarea.message {
-    width: 90%;
-  }
 }

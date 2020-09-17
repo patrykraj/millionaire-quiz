@@ -1,4 +1,5 @@
-import React, { Component } from "react";
+import React, { useContext } from "react";
+import { Context } from "../context/Context";
 
 import Player from "../components/game/Player";
 import ConfirmAnswer from "../components/questions/ConfirmAnswer";
@@ -12,117 +13,104 @@ import Loader from "../components/game/Loader";
 import LifelinesButton from "../components/lifelines/LifelinesButton";
 import "../styles/Game.css";
 
-class Game extends Component {
-  state = {
-    input: "",
-    wrongInput: false,
-    playerName: "",
-    loading: false,
-    quitGame: false,
-    gameOver: false,
-    gameWon: false,
-    question: "",
-    questionNumber: 0,
-    prize: 0,
-    answers: [
-      { id: "A", text: "" },
-      { id: "B", text: "" },
-      { id: "C", text: "" },
-      { id: "D", text: "" }
-    ],
-    selectedAnswer: "",
-    confirmed: false,
-    userAnswer: "",
-    correctAnswer: "",
-    availableLifelines: [
-      { value: "50/50", used: false },
-      { value: "call", used: false },
-      { value: "audience", used: false }
-    ],
-    hint: "",
-    lifelinesVisible: false
+const Game = () => {
+  const state = useContext(Context);
+
+  const {
+    input,
+    wrongInput,
+    playerName,
+    loading,
+    question,
+    questionNumber,
+    answers,
+    selectedAnswer,
+    userAnswer,
+    correctAnswer,
+    confirmed,
+    prize,
+    availableLifelines,
+    hint,
+    lifelinesVisible,
+    quitGame,
+    gameOver,
+    gameWon,
+  } = state;
+
+  const setPlayerName = (e) => {
+    state.input = e.target.value;
   };
 
-  setPlayerName = e => {
-    this.setState({
-      input: e.target.value
-    });
-  };
-
-  startGame = () => {
-    if (this.state.input.length < 3) {
-      this.setState({
-        wrongInput: true
-      });
+  const startGame = () => {
+    if (input.length < 3) {
+      state.wrongInput = true;
       return;
     }
 
-    this.setState({
-      input: "",
-      playerName: this.state.input,
-      loading: true
-    });
+    state.input = "";
+    state.playerName = input;
+    state.loading = true;
 
-    this.nextQuestion();
+    nextQuestion();
   };
 
-  showConfirmation = e => {
-    if (this.state.selectedAnswer || this.state.confirmed) return;
+  const showConfirmation = (e) => {
+    if (selectedAnswer || confirmed) return;
     this.setState({
-      selectedAnswer: e.target.value
+      selectedAnswer: e.target.value,
     });
   };
 
-  handleConfirmation = confirmed => {
+  const handleConfirmation = (confirmed) => {
     if (confirmed) {
       this.setState(
         {
           confirmed,
-          userAnswer: this.state.selectedAnswer
+          userAnswer: selectedAnswer,
         },
-        () => this.handleCorrectness()
+        () => handleCorrectness()
       );
     } else {
       this.setState({
         confirmed,
-        selectedAnswer: ""
+        selectedAnswer: "",
       });
     }
   };
 
-  handleWinner = () => {
+  const handleWinner = () => {
     setTimeout(() => {
       this.setState({
         prize: "1 000 000",
-        gameWon: true
+        gameWon: true,
       });
     }, 2000);
   };
 
-  handleCorrectness = () => {
-    if (this.state.correctAnswer === this.state.userAnswer) {
-      if (this.state.questionNumber === 12) return this.handleWinner();
+  const handleCorrectness = () => {
+    if (correctAnswer === userAnswer) {
+      if (questionNumber === 12) return handleWinner();
       setTimeout(() => {
-        this.nextQuestion();
+        nextQuestion();
       }, 2000);
     } else {
       setTimeout(() => {
-        this.setRanking(this.state.prize);
+        setRanking(prize);
         this.setState({
-          gameOver: true
+          gameOver: true,
         });
       }, 2000);
     }
   };
 
-  setRanking = prize => {
+  const setRanking = (prize) => {
     if (prize < 1) return;
     let rank = JSON.parse(localStorage.getItem("arr")) || [];
     let arr = [];
     arr = arr.concat(rank);
     let playerResult = {
-      player: this.state.playerName,
-      prize
+      player: playerName,
+      prize,
     };
     arr.push(playerResult);
 
@@ -148,21 +136,21 @@ class Game extends Component {
     localStorage.setItem("arr", JSON.stringify(arr));
   };
 
-  setGuaranteedPrize = () => {
-    let prize = this.state.prize || 0;
+  const setGuaranteedPrize = () => {
+    let guaranteedPrize = prize || 0;
 
-    if (this.state.questionNumber >= 7 && this.state.prize !== "40 000") {
-      prize = "40 000";
-    } else if (this.state.questionNumber >= 2 && this.state.prize !== "1000") {
-      prize = "1000";
+    if (questionNumber >= 7 && prize !== "40 000") {
+      guaranteedPrize = "40 000";
+    } else if (questionNumber >= 2 && prize !== "1000") {
+      guaranteedPrize = "1000";
     }
 
     this.setState({
-      prize
+      prize: guaranteedPrize,
     });
   };
 
-  shuffleAnswers = (incorrectAnswers, correctAnswer) => {
+  const shuffleAnswers = (incorrectAnswers, correctAnswer) => {
     const orderedAnswers = [...incorrectAnswers].concat(correctAnswer);
 
     let shuffledAnswers = [];
@@ -176,23 +164,23 @@ class Game extends Component {
       { id: "A", text: orderedAnswers[shuffledAnswers[0]] },
       { id: "B", text: orderedAnswers[shuffledAnswers[1]] },
       { id: "C", text: orderedAnswers[shuffledAnswers[2]] },
-      { id: "D", text: orderedAnswers[shuffledAnswers[3]] }
+      { id: "D", text: orderedAnswers[shuffledAnswers[3]] },
     ];
 
     return answers;
   };
 
-  setQuestionDifficulty = () => {
+  const setQuestionDifficulty = () => {
     let difficulty = "easy";
-    if (this.state.questionNumber >= 2) difficulty = "medium";
-    if (this.state.questionNumber >= 7) difficulty = "hard";
+    if (questionNumber >= 2) difficulty = "medium";
+    if (questionNumber >= 7) difficulty = "hard";
 
     return difficulty;
   };
 
-  replaceErrors = err => {
+  const replaceErrors = (err) => {
     if (typeof err === "object") {
-      err = err.map(er => {
+      err = err.map((er) => {
         while (
           er.text.includes("&amp;") ||
           er.text.includes("&quot;") ||
@@ -243,30 +231,29 @@ class Game extends Component {
     return err;
   };
 
-  nextQuestion = () => {
+  const nextQuestion = () => {
     fetch(
-      `https://opentdb.com/api.php?amount=1&type=multiple&difficulty=${this.setQuestionDifficulty()}`
+      `https://opentdb.com/api.php?amount=1&type=multiple&difficulty=${setQuestionDifficulty()}`
     )
-      .then(response => {
+      .then((response) => {
         if (response.ok) return response;
         throw Error(response.status);
       })
-      .then(response => response.json())
-      .then(data => {
-        let answers = this.shuffleAnswers(
+      .then((response) => response.json())
+      .then((data) => {
+        let answers = shuffleAnswers(
           data.results[0].incorrect_answers,
           data.results[0].correct_answer
         );
-        if (this.state.questionNumber === 2 || this.state.questionNumber === 7)
-          this.setGuaranteedPrize();
+        if (questionNumber === 2 || questionNumber === 7) setGuaranteedPrize();
 
-        data.results[0].question = this.replaceErrors(data.results[0].question);
-        data.results[0].correct_answer = this.replaceErrors(
+        data.results[0].question = replaceErrors(data.results[0].question);
+        data.results[0].correct_answer = replaceErrors(
           data.results[0].correct_answer
         );
-        answers = this.replaceErrors(answers);
+        answers = replaceErrors(answers);
 
-        this.setState(state => ({
+        this.setState((state) => ({
           question: data.results[0].question,
           questionNumber: state.questionNumber + 1,
           correctAnswer: data.results[0].correct_answer,
@@ -276,12 +263,12 @@ class Game extends Component {
           loading: false,
           selectedAnswer: "",
           userAnswer: "",
-          hint: ""
+          hint: "",
         }));
       });
   };
 
-  handleLifeline = selectedLifeline => {
+  const handleLifeline = (selectedLifeline) => {
     const { answers } = this.state;
 
     if (selectedLifeline === "50/50") {
@@ -300,22 +287,22 @@ class Game extends Component {
         }
       }
 
-      this.setState(prevState => ({
-        answers: prevState.answers.map(answer =>
+      this.setState((prevState) => ({
+        answers: prevState.answers.map((answer) =>
           removed.includes(answer.text) ? { ...answer, text: "" } : answer
         ),
-        availableLifelines: prevState.availableLifelines.map(lifeline =>
+        availableLifelines: prevState.availableLifelines.map((lifeline) =>
           lifeline.value === selectedLifeline
             ? { ...lifeline, used: true }
             : lifeline
         ),
-        hint: 50
+        hint: 50,
       }));
     } else {
       let lifelineAnswers = [];
       let hint = "";
 
-      answers.map(answer =>
+      answers.map((answer) =>
         answer.text ? lifelineAnswers.push(answer.text) : null
       );
 
@@ -330,11 +317,11 @@ class Game extends Component {
           `Umm... I'm not sure, but I think it's ${replyAnswer}.`,
           `I don't know, but my guess is ${replyAnswer}.`,
           `It surely is ${replyAnswer}!`,
-          `Sorry, I can't help you.`
+          `Sorry, I can't help you.`,
         ];
         hint = replies[Math.floor(Math.random() * replies.length)];
       } else {
-        const dif = this.setQuestionDifficulty();
+        const dif = setQuestionDifficulty();
         if (dif !== "easy") {
           let randomizeOutcome = Math.floor(
             Math.random() * lifelineAnswers.length
@@ -367,24 +354,24 @@ class Game extends Component {
         hint = counter;
       }
 
-      this.setState(prevState => ({
-        availableLifelines: prevState.availableLifelines.map(lifeline =>
+      this.setState((prevState) => ({
+        availableLifelines: prevState.availableLifelines.map((lifeline) =>
           lifeline.value === selectedLifeline
             ? { ...lifeline, used: true }
             : lifeline
         ),
-        hint
+        hint,
       }));
     }
   };
 
-  handleLifelinesVisibility = () => {
-    this.setState(state => ({
-      lifelinesVisible: !state.lifelinesVisible
+  const handleLifelinesVisibility = () => {
+    this.setState((state) => ({
+      lifelinesVisible: !state.lifelinesVisible,
     }));
   };
 
-  reset = () => {
+  const reset = () => {
     this.setState({
       gameOver: false,
       gameWon: false,
@@ -396,122 +383,100 @@ class Game extends Component {
         { id: "A", text: "" },
         { id: "B", text: "" },
         { id: "C", text: "" },
-        { id: "D", text: "" }
+        { id: "D", text: "" },
       ],
       availableLifelines: [
         { value: "50/50", used: false },
         { value: "call", used: false },
-        { value: "audience", used: false }
+        { value: "audience", used: false },
       ],
       selectedAnswer: "",
       confirmed: false,
       userAnswer: "",
-      correctAnswer: ""
+      correctAnswer: "",
     });
-    this.nextQuestion();
+    nextQuestion();
   };
 
-  handleQuitBtn = () => {
+  const handleQuitBtn = () => {
     if (this.state.confirmed) return;
     this.setState({
-      quitGame: true
+      quitGame: true,
     });
   };
 
-  quit = (gameOver, win = this.state.prize) => {
+  const quit = (gameOver, win = this.state.prize) => {
     this.setState(
       {
         quitGame: false,
         prize: win,
-        gameOver
+        gameOver,
       },
       () => {
-        if (gameOver) this.setRanking(win);
+        if (gameOver) setRanking(win);
       }
     );
   };
 
-  prevent = e => {
+  const prevent = (e) => {
     e.preventDefault();
   };
 
-  render() {
-    const {
-      input,
-      wrongInput,
-      playerName,
-      loading,
-      question,
-      questionNumber,
-      answers,
-      selectedAnswer,
-      correctAnswer,
-      confirmed,
-      prize,
-      availableLifelines,
-      hint,
-      lifelinesVisible,
-      quitGame,
-      gameOver,
-      gameWon
-    } = this.state;
-
-    return (
-      <div className="quiz--container">
-        {loading ? <Loader /> : null}
-        {playerName && question ? null : (
-          <Player
-            prevent={this.prevent}
-            input={input}
-            wrongInput={wrongInput}
-            setPlayerName={this.setPlayerName}
-            startGame={this.startGame}
-          />
-        )}
-        <div className="game">
-          <div className="buttons--container">
-            <QuitButton handleQuitBtn={this.handleQuitBtn} />
-            <LifelinesButton
-              handleLifelinesVisibility={this.handleLifelinesVisibility}
-              lifelinesVisible={lifelinesVisible}
-            />
-          </div>
-          <div className="game--interface">
-            <Lifelines
-              availableLifelines={availableLifelines}
-              handleLifeline={this.handleLifeline}
-              hint={hint}
-              answers={answers}
-              lifelinesVisible={lifelinesVisible}
-            />
-            <ResultBoard questionNumber={questionNumber} />
-          </div>
-          <Question
-            showConfirmation={this.showConfirmation}
-            question={question}
-            answers={answers}
-            selectedAnswer={selectedAnswer}
-            correctAnswer={correctAnswer}
-            confirmed={confirmed}
+  return (
+    <div className="quiz--container">
+      {loading ? <Loader /> : null}
+      {playerName && question ? null : (
+        <Player
+          prevent={prevent}
+          input={input}
+          wrongInput={wrongInput}
+          setPlayerName={setPlayerName}
+          startGame={startGame}
+        />
+      )}
+      <div className="game">
+        <div className="buttons--container">
+          <QuitButton handleQuitBtn={handleQuitBtn} />
+          <LifelinesButton
+            handleLifelinesVisibility={handleLifelinesVisibility}
+            lifelinesVisible={lifelinesVisible}
           />
         </div>
-        {selectedAnswer && !confirmed ? (
-          <ConfirmAnswer handleConfirmation={this.handleConfirmation} />
-        ) : null}
-        {gameOver || gameWon ? (
-          <GameFinish
-            name={playerName}
-            gameOver={gameOver}
-            reset={this.reset}
-            prize={prize}
+        <div className="game--interface">
+          <Lifelines
+            availableLifelines={availableLifelines}
+            handleLifeline={handleLifeline}
+            hint={hint}
+            answers={answers}
+            lifelinesVisible={lifelinesVisible}
           />
-        ) : null}
-        {quitGame ? (
-          <QuitGame quit={this.quit} questionNumber={questionNumber} />
-        ) : null}
+          <ResultBoard questionNumber={questionNumber} />
+        </div>
+        <Question
+          showConfirmation={showConfirmation}
+          question={question}
+          answers={answers}
+          selectedAnswer={selectedAnswer}
+          correctAnswer={correctAnswer}
+          confirmed={confirmed}
+        />
       </div>
-    );
-  }
-}
+      {selectedAnswer && !confirmed ? (
+        <ConfirmAnswer handleConfirmation={handleConfirmation} />
+      ) : null}
+      {gameOver || gameWon ? (
+        <GameFinish
+          name={playerName}
+          gameOver={gameOver}
+          reset={reset}
+          prize={prize}
+        />
+      ) : null}
+      {quitGame ? (
+        <QuitGame quit={quit} questionNumber={questionNumber} />
+      ) : null}
+    </div>
+  );
+};
 
 export default Game;

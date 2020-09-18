@@ -33,5 +33,9 @@ export const DataProvider = (props) => {
     lifelinesVisible: false,
   });
 
-  return <Context.Provider value={data}>{props.children}</Context.Provider>;
+  return (
+    <Context.Provider value={[data, setData]}>
+      {props.children}
+    </Context.Provider>
+  );
 };

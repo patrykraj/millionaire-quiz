@@ -12,9 +12,10 @@ import QuitGame from "../components/game/QuitGame";
 import Loader from "../components/game/Loader";
 import LifelinesButton from "../components/lifelines/LifelinesButton";
 import "../styles/Game.css";
+import { useEffect } from "react";
 
 const Game = () => {
-  const state = useContext(Context);
+  const [state, setState] = useContext(Context);
 
   const {
     input,
@@ -38,40 +39,49 @@ const Game = () => {
   } = state;
 
   const setPlayerName = (e) => {
-    state.input = e.target.value;
+    setState({
+      ...state,
+      input: e.target.value,
+    });
   };
 
   const startGame = () => {
     if (input.length < 3) {
-      state.wrongInput = true;
+      setState({
+        ...state,
+        wrongInput: true,
+      });
       return;
     }
 
-    state.input = "";
-    state.playerName = input;
-    state.loading = true;
+    setState({
+      ...state,
+      input: "",
+      playerName: input,
+      loading: true,
+    });
 
     nextQuestion();
   };
 
   const showConfirmation = (e) => {
     if (selectedAnswer || confirmed) return;
-    this.setState({
+    setState({
+      ...state,
       selectedAnswer: e.target.value,
     });
   };
 
   const handleConfirmation = (confirmed) => {
     if (confirmed) {
-      this.setState(
-        {
-          confirmed,
-          userAnswer: selectedAnswer,
-        },
-        () => handleCorrectness()
-      );
+      setState({
+        ...state,
+        confirmed,
+        userAnswer: selectedAnswer,
+      });
     } else {
-      this.setState({
+      setState({
+        ...state,
         confirmed,
         selectedAnswer: "",
       });
@@ -80,7 +90,8 @@ const Game = () => {
 
   const handleWinner = () => {
     setTimeout(() => {
-      this.setState({
+      setState({
+        ...state,
         prize: "1 000 000",
         gameWon: true,
       });
@@ -96,12 +107,19 @@ const Game = () => {
     } else {
       setTimeout(() => {
         setRanking(prize);
-        this.setState({
+        setState({
+          ...state,
           gameOver: true,
         });
       }, 2000);
     }
   };
+
+  useEffect(() => {
+    if (confirmed) {
+      handleCorrectness();
+    }
+  }, [confirmed]);
 
   const setRanking = (prize) => {
     if (prize < 1) return;
@@ -145,7 +163,8 @@ const Game = () => {
       guaranteedPrize = "1000";
     }
 
-    this.setState({
+    setState({
+      ...state,
       prize: guaranteedPrize,
     });
   };
@@ -253,7 +272,8 @@ const Game = () => {
         );
         answers = replaceErrors(answers);
 
-        this.setState((state) => ({
+        setState((state) => ({
+          ...state,
           question: data.results[0].question,
           questionNumber: state.questionNumber + 1,
           correctAnswer: data.results[0].correct_answer,
@@ -269,7 +289,7 @@ const Game = () => {
   };
 
   const handleLifeline = (selectedLifeline) => {
-    const { answers } = this.state;
+    const { answers } = state;
 
     if (selectedLifeline === "50/50") {
       let i = 0;
@@ -279,7 +299,7 @@ const Game = () => {
         let num = Math.floor(Math.random() * answers.length);
         if (
           answers[num].text &&
-          answers[num].text !== this.state.correctAnswer &&
+          answers[num].text !== state.correctAnswer &&
           !removed.includes(answers[num].text)
         ) {
           removed.push(answers[num].text);
@@ -287,7 +307,8 @@ const Game = () => {
         }
       }
 
-      this.setState((prevState) => ({
+      setState((prevState) => ({
+        ...state,
         answers: prevState.answers.map((answer) =>
           removed.includes(answer.text) ? { ...answer, text: "" } : answer
         ),
@@ -308,7 +329,7 @@ const Game = () => {
 
       if (selectedLifeline === "call") {
         for (let i = 0; i < 2; i++) {
-          lifelineAnswers.push(this.state.correctAnswer);
+          lifelineAnswers.push(state.correctAnswer);
         }
 
         const num = Math.floor(Math.random() * lifelineAnswers.length);
@@ -335,7 +356,7 @@ const Game = () => {
         }
 
         for (let i = 0; i < 2; i++) {
-          lifelineAnswers.push(this.state.correctAnswer);
+          lifelineAnswers.push(state.correctAnswer);
         }
 
         let abcd = [];
@@ -354,7 +375,8 @@ const Game = () => {
         hint = counter;
       }
 
-      this.setState((prevState) => ({
+      setState((prevState) => ({
+        ...state,
         availableLifelines: prevState.availableLifelines.map((lifeline) =>
           lifeline.value === selectedLifeline
             ? { ...lifeline, used: true }
@@ -366,13 +388,14 @@ const Game = () => {
   };
 
   const handleLifelinesVisibility = () => {
-    this.setState((state) => ({
+    setState((state) => ({
       lifelinesVisible: !state.lifelinesVisible,
     }));
   };
 
   const reset = () => {
-    this.setState({
+    setState({
+      ...state,
       gameOver: false,
       gameWon: false,
       question: "",
@@ -399,23 +422,24 @@ const Game = () => {
   };
 
   const handleQuitBtn = () => {
-    if (this.state.confirmed) return;
-    this.setState({
+    if (state.confirmed) return;
+    setState({
+      ...state,
       quitGame: true,
     });
   };
 
-  const quit = (gameOver, win = this.state.prize) => {
-    this.setState(
-      {
-        quitGame: false,
-        prize: win,
-        gameOver,
-      },
-      () => {
-        if (gameOver) setRanking(win);
-      }
-    );
+  useEffect(() => {
+    if (gameOver) setRanking(state.prize);
+  }, [gameOver, state.prize]);
+
+  const quit = (gameOver, win = state.prize) => {
+    setState({
+      ...state,
+      quitGame: false,
+      prize: win,
+      gameOver,
+    });
   };
 
   const prevent = (e) => {

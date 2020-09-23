@@ -3,7 +3,7 @@ import React from "react";
 import Answer from "./Answer";
 import "../../styles/Question.css";
 
-const Question = props => {
+const Question = (props) => {
   const answers = [];
   const answers2 = [];
   for (let i = 0; i < props.answers.length; i++) {

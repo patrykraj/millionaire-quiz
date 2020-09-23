@@ -1,6 +1,6 @@
 import React from "react";
 
-const GameFinish = props => {
+const GameFinish = (props) => {
   const loss = (
     <>
       <h3>Game over!</h3>
@@ -31,7 +31,7 @@ const GameFinish = props => {
           </button>
         </div>
         <div className="answer--box">
-          <a href={process.env.PUBLIC_URL}>
+          <a href="/">
             <button className="answer quest">No</button>
           </a>
         </div>

@@ -98,29 +98,6 @@ const Game = () => {
     }, 2000);
   };
 
-  const handleCorrectness = () => {
-    if (correctAnswer === userAnswer) {
-      if (questionNumber === 12) return handleWinner();
-      setTimeout(() => {
-        nextQuestion();
-      }, 2000);
-    } else {
-      setTimeout(() => {
-        setRanking(prize);
-        setState({
-          ...state,
-          gameOver: true,
-        });
-      }, 2000);
-    }
-  };
-
-  useEffect(() => {
-    if (confirmed) {
-      handleCorrectness();
-    }
-  }, [confirmed]);
-
   const setRanking = (prize) => {
     if (prize < 1) return;
     let rank = JSON.parse(localStorage.getItem("arr")) || [];
@@ -389,6 +366,7 @@ const Game = () => {
 
   const handleLifelinesVisibility = () => {
     setState((state) => ({
+      ...state,
       lifelinesVisible: !state.lifelinesVisible,
     }));
   };
@@ -396,6 +374,7 @@ const Game = () => {
   const reset = () => {
     setState({
       ...state,
+      confirmed: false,
       gameOver: false,
       gameWon: false,
       question: "",
@@ -414,24 +393,51 @@ const Game = () => {
         { value: "audience", used: false },
       ],
       selectedAnswer: "",
-      confirmed: false,
       userAnswer: "",
       correctAnswer: "",
     });
-    nextQuestion();
+
+    fetch(`https://opentdb.com/api.php?amount=1&type=multiple&difficulty=easy`)
+      .then((response) => {
+        if (response.ok) return response;
+        throw Error(response.status);
+      })
+      .then((response) => response.json())
+      .then((data) => {
+        let answers = shuffleAnswers(
+          data.results[0].incorrect_answers,
+          data.results[0].correct_answer
+        );
+
+        data.results[0].question = replaceErrors(data.results[0].question);
+        data.results[0].correct_answer = replaceErrors(
+          data.results[0].correct_answer
+        );
+        answers = replaceErrors(answers);
+
+        setState((state) => ({
+          ...state,
+          question: data.results[0].question,
+          questionNumber: state.questionNumber + 1,
+          correctAnswer: data.results[0].correct_answer,
+          answers,
+          lifelinesVisible: false,
+          confirmed: false,
+          loading: false,
+          selectedAnswer: "",
+          userAnswer: "",
+          hint: "",
+        }));
+      });
   };
 
   const handleQuitBtn = () => {
-    if (state.confirmed) return;
+    if (confirmed) return;
     setState({
       ...state,
       quitGame: true,
     });
   };
-
-  useEffect(() => {
-    if (gameOver) setRanking(state.prize);
-  }, [gameOver, state.prize]);
 
   const quit = (gameOver, win = state.prize) => {
     setState({
@@ -445,6 +451,45 @@ const Game = () => {
   const prevent = (e) => {
     e.preventDefault();
   };
+
+  useEffect(() => {
+    if (confirmed && !gameOver) {
+      const handleCorrectness = () => {
+        if (correctAnswer === userAnswer) {
+          if (questionNumber === 12) return handleWinner();
+          setTimeout(() => {
+            nextQuestion();
+          }, 2000);
+        } else {
+          setTimeout(() => {
+            setRanking(prize);
+            setState({
+              ...state,
+              gameOver: true,
+            });
+          }, 2000);
+        }
+      };
+
+      handleCorrectness();
+    }
+
+    if (gameOver) {
+      setRanking(prize);
+    }
+  }, [
+    confirmed,
+    gameOver,
+    correctAnswer,
+    handleWinner,
+    nextQuestion,
+    prize,
+    questionNumber,
+    setRanking,
+    setState,
+    state,
+    userAnswer,
+  ]);
 
   return (
     <div className="quiz--container">

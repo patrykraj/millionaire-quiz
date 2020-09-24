@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useCallback, useContext } from "react";
 import { Context } from "../context/Context";
 
 import Player from "../components/game/Player";
@@ -88,7 +88,7 @@ const Game = () => {
     }
   };
 
-  const handleWinner = () => {
+  const handleWinner = useCallback(() => {
     setTimeout(() => {
       setState({
         ...state,
@@ -96,42 +96,45 @@ const Game = () => {
         gameWon: true,
       });
     }, 2000);
-  };
+  }, [setState, state]);
 
-  const setRanking = (prize) => {
-    if (prize < 1) return;
-    let rank = JSON.parse(localStorage.getItem("arr")) || [];
-    let arr = [];
-    arr = arr.concat(rank);
-    let playerResult = {
-      player: playerName,
-      prize,
-    };
-    arr.push(playerResult);
+  const setRanking = useCallback(
+    (prize) => {
+      if (prize < 1) return;
+      let rank = JSON.parse(localStorage.getItem("arr")) || [];
+      let arr = [];
+      arr = arr.concat(rank);
+      let playerResult = {
+        player: playerName,
+        prize,
+      };
+      arr.push(playerResult);
 
-    function compare(a, b) {
-      if (typeof a.prize === "string" && a.prize.indexOf(" "))
-        a.prize = a.prize.replace(" ", "");
-      if (typeof b.prize === "string" && b.prize.indexOf(" "))
-        b.prize = b.prize.replace(" ", "");
-      a.prize = parseInt(a.prize);
-      b.prize = parseInt(b.prize);
-      const avalue = a.prize;
-      const bvalue = b.prize;
+      function compare(a, b) {
+        if (typeof a.prize === "string" && a.prize.indexOf(" "))
+          a.prize = a.prize.replace(" ", "");
+        if (typeof b.prize === "string" && b.prize.indexOf(" "))
+          b.prize = b.prize.replace(" ", "");
+        a.prize = parseInt(a.prize);
+        b.prize = parseInt(b.prize);
+        const avalue = a.prize;
+        const bvalue = b.prize;
 
-      if (avalue < bvalue) return 1;
-      else if (avalue > bvalue) return -1;
-      else return 0;
-    }
+        if (avalue < bvalue) return 1;
+        else if (avalue > bvalue) return -1;
+        else return 0;
+      }
 
-    arr = arr.sort(compare);
+      arr = arr.sort(compare);
 
-    if (arr.length > 5) arr.pop();
+      if (arr.length > 5) arr.pop();
 
-    localStorage.setItem("arr", JSON.stringify(arr));
-  };
+      localStorage.setItem("arr", JSON.stringify(arr));
+    },
+    [playerName]
+  );
 
-  const setGuaranteedPrize = () => {
+  const setGuaranteedPrize = useCallback(() => {
     let guaranteedPrize = prize || 0;
 
     if (questionNumber >= 7 && prize !== "40 000") {
@@ -144,7 +147,7 @@ const Game = () => {
       ...state,
       prize: guaranteedPrize,
     });
-  };
+  }, [prize, questionNumber, setState, state]);
 
   const shuffleAnswers = (incorrectAnswers, correctAnswer) => {
     const orderedAnswers = [...incorrectAnswers].concat(correctAnswer);
@@ -166,13 +169,13 @@ const Game = () => {
     return answers;
   };
 
-  const setQuestionDifficulty = () => {
+  const setQuestionDifficulty = useCallback(() => {
     let difficulty = "easy";
     if (questionNumber >= 2) difficulty = "medium";
     if (questionNumber >= 7) difficulty = "hard";
 
     return difficulty;
-  };
+  }, [questionNumber]);
 
   const replaceErrors = (err) => {
     if (typeof err === "object") {
@@ -227,7 +230,7 @@ const Game = () => {
     return err;
   };
 
-  const nextQuestion = () => {
+  const nextQuestion = useCallback(() => {
     fetch(
       `https://opentdb.com/api.php?amount=1&type=multiple&difficulty=${setQuestionDifficulty()}`
     )
@@ -263,7 +266,7 @@ const Game = () => {
           hint: "",
         }));
       });
-  };
+  }, [setQuestionDifficulty, questionNumber, setGuaranteedPrize, setState]);
 
   const handleLifeline = (selectedLifeline) => {
     const { answers } = state;
@@ -452,44 +455,29 @@ const Game = () => {
     e.preventDefault();
   };
 
-  useEffect(() => {
-    if (confirmed && !gameOver) {
-      const handleCorrectness = () => {
-        if (correctAnswer === userAnswer) {
-          if (questionNumber === 12) return handleWinner();
-          setTimeout(() => {
-            nextQuestion();
-          }, 2000);
-        } else {
-          setTimeout(() => {
-            setRanking(prize);
-            setState({
-              ...state,
-              gameOver: true,
-            });
-          }, 2000);
-        }
-      };
+  const handleCorrectness = () => {
+    if (correctAnswer === userAnswer) {
+      if (questionNumber === 12) return handleWinner();
+      setTimeout(() => {
+        nextQuestion();
+      }, 2000);
+    } else {
+      setTimeout(() => {
+        setRanking(prize);
+        setState({
+          ...state,
+          gameOver: true,
+        });
+      }, 2000);
+    }
+  };
 
+  useEffect(() => {
+    if (confirmed) {
       handleCorrectness();
     }
-
-    if (gameOver) {
-      setRanking(prize);
-    }
-  }, [
-    confirmed,
-    gameOver,
-    correctAnswer,
-    handleWinner,
-    nextQuestion,
-    prize,
-    questionNumber,
-    setRanking,
-    setState,
-    state,
-    userAnswer,
-  ]);
+    // eslint-disable-next-line
+  }, [confirmed]);
 
   return (
     <div className="quiz--container">

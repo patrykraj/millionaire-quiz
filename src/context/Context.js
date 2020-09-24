@@ -31,6 +31,7 @@ export const DataProvider = (props) => {
     ],
     hint: "",
     lifelinesVisible: false,
+    loadingForNextQuestion: false,
   });
 
   return (

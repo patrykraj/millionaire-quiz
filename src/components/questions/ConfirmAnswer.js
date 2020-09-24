@@ -1,6 +1,27 @@
-import React from "react";
+import React, { useContext } from "react";
+import { Context } from "../../context/Context";
 
-const ConfirmAnswer = props => {
+const ConfirmAnswer = () => {
+  const [state, setState] = useContext(Context);
+
+  const { selectedAnswer } = state;
+
+  const handleConfirmation = (confirmed) => {
+    if (confirmed) {
+      setState({
+        ...state,
+        confirmed,
+        userAnswer: selectedAnswer,
+      });
+    } else {
+      setState({
+        ...state,
+        confirmed,
+        selectedAnswer: "",
+      });
+    }
+  };
+
   return (
     <div className="submit--container fullscreen">
       <div className="submit--answer">
@@ -9,7 +30,7 @@ const ConfirmAnswer = props => {
       <div className="answer--row">
         <div className="answer--box">
           <button
-            onClick={() => props.handleConfirmation(true)}
+            onClick={() => handleConfirmation(true)}
             className="answer quest"
           >
             Yes
@@ -17,7 +38,7 @@ const ConfirmAnswer = props => {
         </div>
         <div className="answer--box">
           <button
-            onClick={() => props.handleConfirmation(false)}
+            onClick={() => handleConfirmation(false)}
             className="answer quest"
           >
             No

@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Context } from "../../context/Context";
 
-import classes from "../questions/Question.module.css";
+import classes from "../questions/ConfirmAnswer.module.css";
 
 const GameFinish = ({ shuffleAnswers, replaceErrors }) => {
   const [state, setState] = useContext(Context);

@@ -1,0 +1,57 @@
+.LifelineResult {
+  display: flex;
+  justify-content: space-around;
+}
+
+.LifelineChart {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+  flex-grow: 1;
+  padding: 1rem 0;
+}
+
+.PhoneContainer {
+  align-self: center;
+}
+
+.MaterialIcons {
+  font-size: 8rem;
+}
+
+.PhoneDotsContainer {
+  display: flex;
+  justify-content: space-around;
+  padding: 0 1rem;
+}
+
+.PhoneDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: white;
+  animation: shrink 2s infinite;
+}
+
+.PhoneDot:nth-child(2) {
+  animation-delay: 0.33s;
+}
+
+.PhoneDot:nth-child(3) {
+  animation-delay: 0.67s;
+}
+
+.Lifeline50Logo {
+  font-size: 6rem;
+  font-family: monospace;
+  margin: 0;
+  border: 5px solid silver;
+  border-radius: 50%;
+  padding: 2rem;
+}
+
+@keyframes shrink {
+  50% {
+    transform: scale(0);
+  }
+}

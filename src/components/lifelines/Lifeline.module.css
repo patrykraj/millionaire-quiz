@@ -1,0 +1,67 @@
+.Lifeline {
+  flex: 1;
+  padding: 0 1rem;
+  display: flex;
+}
+
+.LifelineBtn {
+  position: relative;
+  font-family: monospace;
+  background-color: transparent;
+  border: 2px solid silver;
+  color: #efefef;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: 0.2s all;
+  padding: 0.75rem 1rem;
+  font-weight: bold;
+  font-size: 1.3rem;
+  width: 100%;
+  overflow: hidden;
+}
+
+.MaterialIcons {
+  display: flex;
+  justify-content: center;
+}
+
+.LifelineBtn:hover {
+  background-color: orange;
+}
+
+.DisabledBtn {
+  cursor: default;
+}
+
+.DisabledBtn:hover {
+  background-color: initial;
+}
+
+.DisabledBtn:focus {
+  outline: none;
+}
+
+.DisabledBtn::before,
+.DisabledBtn::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 4px;
+  background-color: crimson;
+  left: 0;
+  top: 50%;
+}
+
+.DisabledBtn::before {
+  transform: translateY(-50%) rotate(20deg);
+}
+
+.DisabledBtn::after {
+  transform: translateY(-50%) rotate(160deg);
+}
+
+@media (max-width: 750px) {
+  .Lifeline {
+    padding: 0 0.2rem;
+  }
+}

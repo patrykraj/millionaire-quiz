@@ -1,9 +1,10 @@
 import React, { useContext } from "react";
 import { Context } from "../../context/Context";
 
-import "../../styles/Lifelines.css";
 import Lifeline from "./Lifeline";
 import SelectedLifeline from "./SelectedLifeline";
+
+import classes from "./Lifelines.module.css";
 
 const Lifelines = ({ setQuestionDifficulty }) => {
   const [state, setState] = useContext(Context);
@@ -122,11 +123,11 @@ const Lifelines = ({ setQuestionDifficulty }) => {
     <div
       className={
         lifelinesVisible
-          ? "lifelines--container board lifelines--visible"
-          : "lifelines--container board"
+          ? `${classes.LifelinesContainer} board ${classes.LifelinesVisible}`
+          : `${classes.LifelinesContainer} board`
       }
     >
-      <div className="lifelines">{lifelines}</div>
+      <div className={classes.Lifelines}>{lifelines}</div>
       {hint ? <SelectedLifeline hint={hint} answers={answers} /> : null}
     </div>
   );

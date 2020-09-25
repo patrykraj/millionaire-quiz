@@ -2,36 +2,40 @@ import React from "react";
 
 import Chart from "./Chart";
 
-const SelectedLifeline = props => {
+import classes from "./SelectedLifeline.module.css";
+
+const SelectedLifeline = ({ hint, answers }) => {
   let results, data;
 
-  if (typeof props.hint === "number") {
+  if (typeof hint === "number") {
     results = (
-      <div className="phone--container">
+      <div className={classes.PhoneContainer}>
         {" "}
-        <h2 className="lifeline50--logo">50|50</h2>
+        <h2 className={classes.Lifeline50Logo}>50|50</h2>
       </div>
     );
-  } else if (typeof props.hint === "string") {
+  } else if (typeof hint === "string") {
     results = (
-      <div className="phone--container">
-        <span className="material-icons">local_phone</span>
-        <div className="phoneDots--container">
-          <div className="phoneDot"></div>
-          <div className="phoneDot"></div>
-          <div className="phoneDot"></div>
+      <div className={classes.PhoneContainer}>
+        <span className={`${classes.MaterialIcons} material-icons`}>
+          local_phone
+        </span>
+        <div className={classes.PhoneDotsContainer}>
+          <div className={classes.PhoneDot}></div>
+          <div className={classes.PhoneDot}></div>
+          <div className={classes.PhoneDot}></div>
         </div>
       </div>
     );
-    data = <span>{props.hint}</span>;
+    data = <span>{hint}</span>;
   } else {
     const result = [];
 
-    for (let [key, value] of Object.entries(props.hint)) {
-      props.answers.map(answer => {
+    for (let [key, value] of Object.entries(hint)) {
+      answers.map((answer) => {
         if (key === answer.text) {
           const obj = {
-            [answer.id]: value
+            [answer.id]: value,
           };
           result.push(obj);
         }
@@ -50,11 +54,11 @@ const SelectedLifeline = props => {
 
     result.sort(compare);
 
-    results = result.map(item => (
+    results = result.map((item) => (
       <Chart key={Object.keys(item)} height={Object.values(item)} />
     ));
 
-    data = result.map(item => (
+    data = result.map((item) => (
       <span className="chart--data" key={Object.keys(item)}>
         {Object.keys(item)}: {Object.values(item)}%
       </span>
@@ -63,8 +67,8 @@ const SelectedLifeline = props => {
 
   return (
     <>
-      <div className="lifeline--chart">{results}</div>
-      <div className="lifeline--result">{data}</div>
+      <div className={classes.LifelineChart}>{results}</div>
+      <div className={classes.LifelineResult}>{data}</div>
     </>
   );
 };

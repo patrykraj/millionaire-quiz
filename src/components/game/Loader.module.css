@@ -1,4 +1,4 @@
-div.loader {
+.Loader {
   position: absolute;
   top: 0;
   left: 0;
@@ -11,12 +11,12 @@ div.loader {
   align-items: center;
 }
 
-div.loader div.bubble--container {
+.BubbleContainer {
   position: relative;
   transform: translateY(10%);
 }
 
-div.loader div.bubble--container div.bubble--loader {
+.BubbleLoader {
   position: relative;
   margin: 0.5rem;
   width: 80px;
@@ -27,7 +27,7 @@ div.loader div.bubble--container div.bubble--loader {
   animation: load 1.5s infinite linear;
 }
 
-div.loader div.bubble--container div.bubble--loader:nth-child(2) {
+.BubbleLoader:nth-child(2) {
   top: 10px;
   left: 20px;
   width: 50px;
@@ -35,7 +35,7 @@ div.loader div.bubble--container div.bubble--loader:nth-child(2) {
   animation: loadgrow 1.8s infinite linear;
 }
 
-div.loader div.bubble--container div.bubble--loader:nth-child(3) {
+.BubbleLoader:nth-child(3) {
   top: -120px;
   left: -80px;
   animation: load 1.2s infinite linear;
@@ -54,17 +54,17 @@ div.loader div.bubble--container div.bubble--loader:nth-child(3) {
 }
 
 @media (max-width: 900px) {
-  div.loader div.bubble--container {
+  .BubbleContainer {
     transform: translate(30px, 5%);
   }
 }
 
 @media (max-width: 400px) {
-  div.loader {
+  .Loader {
     align-items: unset;
   }
 
-  div.loader div.bubble--container {
+  .BubbleContainer {
     margin-top: calc(50vh - 30%);
   }
 }

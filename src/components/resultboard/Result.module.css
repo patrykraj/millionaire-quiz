@@ -1,10 +1,4 @@
-div.resultBoard ul.resultBoard--list {
-  padding: 0;
-  margin: 0;
-  list-style: none;
-}
-
-div.resultBoard ul.resultBoard--list li.result {
+.Result {
   position: relative;
   font-size: 1.2rem;
   font-weight: bold;
@@ -15,28 +9,24 @@ div.resultBoard ul.resultBoard--list li.result {
   transition: 0.3s all;
 }
 
-div.resultBoard ul.resultBoard--list li.result.currentQuestion {
+.CurrentQuestion {
   background: linear-gradient(to top, orange, gold, orange);
   text-shadow: 2px 1px #111;
   border: 2px solid silver;
   border-radius: 20px;
 }
 
-div.resultBoard ul.resultBoard--list li.result.guaranteed {
+.Guaranteed {
   color: #fff;
 }
 
-div.resultBoard ul.resultBoard--list li.result span.result--number {
+.ResultNumber {
   position: absolute;
   left: 5px;
 }
 
 @media (max-width: 750px) {
-  div.resultBoard {
-    margin-left: 0;
-  }
-
-  div.resultBoard ul.resultBoard--list li.result {
+  .Result {
     font-size: 1.1rem;
     padding: 0 5px;
   }

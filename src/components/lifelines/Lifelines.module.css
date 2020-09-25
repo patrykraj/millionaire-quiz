@@ -1,0 +1,23 @@
+.LifelinesContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.Lifelines {
+  display: flex;
+  justify-content: space-between;
+}
+
+@media (max-width: 750px) {
+  .LifelinesContainer {
+    position: absolute;
+    transform: translateX(calc(-100% - 2rem));
+    transition: 0.9s all;
+    z-index: 1;
+  }
+
+  .LifelinesVisible {
+    transform: translateX(0);
+  }
+}

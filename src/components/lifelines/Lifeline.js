@@ -1,18 +1,30 @@
 import React from "react";
 
-const Lifeline = props => {
+import classes from "./Lifeline.module.css";
+
+const Lifeline = ({ value, used, handleLifeline }) => {
   let icon = "50|50";
-  if (props.value === "call")
-    icon = <span className="material-icons">local_phone</span>;
-  else if (props.value === "audience")
-    icon = <span className="material-icons">person</span>;
+  if (value === "call")
+    icon = (
+      <span className={`${classes.MaterialIcons} material-icons`}>
+        local_phone
+      </span>
+    );
+  else if (value === "audience")
+    icon = (
+      <span className={`${classes.MaterialIcons} material-icons`}>person</span>
+    );
 
   return (
-    <div className="lifeline">
+    <div className={classes.Lifeline}>
       <button
-        onClick={!props.used ? () => props.handleLifeline(props.value) : null}
-        className={props.used ? "lifeline--btn disabled--btn" : "lifeline--btn"}
-        value={props.value}
+        onClick={!used ? () => handleLifeline(value) : null}
+        className={
+          used
+            ? `${classes.LifelineBtn} ${classes.DisabledBtn}`
+            : classes.LifelineBtn
+        }
+        value={value}
       >
         {icon}
       </button>

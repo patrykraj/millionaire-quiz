@@ -1,0 +1,37 @@
+.Quest {
+  text-align: center;
+  padding: 1rem 1rem;
+  width: 100%;
+  border-radius: 20px;
+  background-color: #111;
+  color: #efefef;
+  font-size: 1rem;
+  margin: 0.5rem 0;
+  border: 2px solid silver;
+  transition: 0.2s all;
+}
+
+.AnswerBox {
+  flex: 1;
+}
+
+.SelectedAnswer {
+  background-color: orange;
+}
+
+.Answer:hover {
+  background-color: orange;
+  cursor: pointer;
+}
+
+.CorrectAnswer {
+  background-color: #2ecc71;
+}
+
+.Answer {
+  text-align: left;
+}
+
+.TextOrange {
+  color: gold;
+}

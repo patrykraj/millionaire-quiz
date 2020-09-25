@@ -1,0 +1,11 @@
+.Chart {
+  width: 25px;
+  background: orange;
+  animation: grow 1s;
+}
+
+@keyframes grow {
+  0% {
+    height: 0;
+  }
+}

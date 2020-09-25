@@ -11,7 +11,7 @@ import QuitGame from "../components/game/QuitGame";
 import Loader from "../components/game/Loader";
 import ActionButtons from "../components/game/ActionButtons";
 
-import "../styles/Game.css";
+import classes from "./Game.module.css";
 
 const Game = () => {
   const [state, setState] = useContext(Context);
@@ -256,12 +256,12 @@ const Game = () => {
   }, [confirmed]);
 
   return (
-    <div className="quiz--container">
+    <div className={classes.QuizContainer}>
       {loading ? <Loader /> : null}
       {playerName && question ? null : <Player startGame={startGame} />}
-      <div className="game">
+      <div className={classes.Game}>
         <ActionButtons />
-        <div className="game--interface">
+        <div className={classes.GameInterface}>
           <Lifelines setQuestionDifficulty={setQuestionDifficulty} />
           <ResultBoard questionNumber={questionNumber} />
         </div>

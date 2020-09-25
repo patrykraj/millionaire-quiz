@@ -1,13 +1,13 @@
 import React from "react";
-import "../../styles/Loader.css";
+import classes from "./Loader.module.css";
 
 const Loader = () => {
   return (
-    <div className="loader">
-      <div className="bubble--container">
-        <div className="bubble--loader"></div>
-        <div className="bubble--loader"></div>
-        <div className="bubble--loader"></div>
+    <div className={classes.Loader}>
+      <div className={classes.BubbleContainer}>
+        <div className={classes.BubbleLoader}></div>
+        <div className={classes.BubbleLoader}></div>
+        <div className={classes.BubbleLoader}></div>
       </div>
     </div>
   );

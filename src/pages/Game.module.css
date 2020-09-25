@@ -1,0 +1,42 @@
+.QuizContainer {
+  position: relative;
+  max-width: 968px;
+  min-width: 900px;
+  min-height: 100vh;
+  margin: 0 auto;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Game {
+  width: 100%;
+  margin: 1rem;
+  position: relative;
+  text-align: center;
+}
+
+.GameInterface {
+  display: flex;
+}
+
+@media (max-width: 900px) {
+  .QuizContainer {
+    min-width: 600px;
+    height: 100%;
+  }
+}
+
+@media (max-width: 750px) {
+  .QuizContainer {
+    flex-direction: column;
+    padding: 1rem 0.3rem;
+    min-width: 200px;
+    height: auto;
+  }
+
+  .Game {
+    margin: 1rem 0;
+  }
+}

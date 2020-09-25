@@ -1,26 +1,32 @@
 import React from "react";
 
-import classes from "./Question.module.css";
+import classes from "./Answer.module.css";
 
-const Answer = (props) => {
+const Answer = ({
+  data,
+  showConfirmation,
+  confirmed,
+  selectedAnswer,
+  correctAnswer,
+}) => {
   return (
     <div className={classes.AnswerBox}>
       <button
-        value={props.data.text}
-        onClick={props.showConfirmation}
+        value={data.text}
+        onClick={showConfirmation}
         className={
-          props.correctAnswer === props.data.text && props.confirmed
+          correctAnswer === data.text && confirmed
             ? `${classes.Answer} ${classes.Quest} ${classes.CorrectAnswer}`
-            : props.data.text && props.selectedAnswer === props.data.text
+            : data.text && selectedAnswer === data.text
             ? `${classes.Answer} ${classes.Quest} ${classes.SelectedAnswer}`
-            : !props.data.text
+            : !data.text
             ? `${classes.Answer} ${classes.Quest} disabled--btn`
             : `${classes.Answer} ${classes.Quest}`
         }
       >
-        <span className={classes.TextOrange}>{props.data.id}</span>
+        <span className={classes.TextOrange}>{data.id}</span>
         {": "}
-        {props.data.text}
+        {data.text}
       </button>
     </div>
   );

@@ -1,20 +1,22 @@
 import React from "react";
 
-const Result = props => {
+import classes from "./Result.module.css";
+
+const Result = ({ questionNumber, id, value }) => {
   return (
     <li
       className={
-        props.questionNumber === props.id
-          ? "result currentQuestion"
-          : props.id === 2 || props.id === 7 || props.id === 12
-          ? "result guaranteed"
-          : "result"
+        questionNumber === id
+          ? `${classes.Result} ${classes.CurrentQuestion}`
+          : id === 2 || id === 7 || id === 12
+          ? `${classes.Result} ${classes.Guaranteed}`
+          : `${classes.Result}`
       }
     >
-      <span className="result--number">
-        {props.questionNumber > props.id ? `${props.id} \u25C6` : props.id}
+      <span className={classes.ResultNumber}>
+        {questionNumber > id ? `${id} \u25C6` : id}
       </span>{" "}
-      {props.value}
+      {value}
     </li>
   );
 };

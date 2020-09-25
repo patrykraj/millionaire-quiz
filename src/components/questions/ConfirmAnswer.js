@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Context } from "../../context/Context";
 
-import classes from "./Question.module.css";
+import classes from "./ConfirmAnswer.module.css";
 
 const ConfirmAnswer = () => {
   const [state, setState] = useContext(Context);

@@ -1,9 +1,9 @@
 import React from "react";
 
 import Result from "./Result";
-import "../../styles/ResultBoard.css";
+import classes from "./ResultBoard.module.css";
 
-const ResultBoard = props => {
+const ResultBoard = ({ questionNumber }) => {
   const prizes = [
     { id: 1, value: "500" },
     { id: 2, value: "1000" },
@@ -16,23 +16,23 @@ const ResultBoard = props => {
     { id: 9, value: "125 000" },
     { id: 10, value: "250 000" },
     { id: 11, value: "500 000" },
-    { id: 12, value: "1 000 000" }
+    { id: 12, value: "1 000 000" },
   ];
 
   const list = prizes
     .reverse()
-    .map(prize => (
+    .map((prize) => (
       <Result
         key={prize.id}
         id={prize.id}
         value={prize.value}
-        questionNumber={props.questionNumber}
+        questionNumber={questionNumber}
       />
     ));
 
   return (
-    <div className="resultBoard board">
-      <ul className="resultBoard--list">{list}</ul>
+    <div className={`${classes.resultBoard} board`}>
+      <ul className={classes.ResultBoardList}>{list}</ul>
     </div>
   );
 };

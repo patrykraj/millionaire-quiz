@@ -4,7 +4,7 @@ import { Context } from "../../context/Context";
 import Answer from "./Answer";
 import classes from "./Question.module.css";
 
-const Question = (props) => {
+const Question = () => {
   const [state, setState] = useContext(Context);
 
   const showConfirmation = (e) => {

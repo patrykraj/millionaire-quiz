@@ -1,6 +1,8 @@
 import React, { useContext } from "react";
 import { Context } from "../../context/Context";
 
+import classes from "./Question.module.css";
+
 const ConfirmAnswer = () => {
   const [state, setState] = useContext(Context);
 
@@ -25,21 +27,21 @@ const ConfirmAnswer = () => {
   return (
     <div className="submit--container fullscreen">
       <div className="submit--answer">
-        <p className="submit quest">Is that your final answer?</p>
+        <p className={`submit ${classes.Quest}`}>Is that your final answer?</p>
       </div>
-      <div className="answer--row">
-        <div className="answer--box">
+      <div className={classes.AnswerRow}>
+        <div className={`${classes.AnswerBox}`}>
           <button
             onClick={() => handleConfirmation(true)}
-            className="answer quest"
+            className={`${classes.Answer} ${classes.Quest}`}
           >
             Yes
           </button>
         </div>
-        <div className="answer--box">
+        <div className={`${classes.AnswerBox}`}>
           <button
             onClick={() => handleConfirmation(false)}
-            className="answer quest"
+            className={`${classes.Answer} ${classes.Quest}`}
           >
             No
           </button>

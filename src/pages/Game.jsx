@@ -1,4 +1,4 @@
-import React, { useCallback, useContext } from "react";
+import React, { useEffect, useCallback, useContext } from "react";
 import { Context } from "../context/Context";
 
 import Player from "../components/game/Player";
@@ -7,12 +7,11 @@ import GameFinish from "../components/game/GameFinish";
 import Question from "../components/questions/Question";
 import ResultBoard from "../components/resultboard/ResultBoard";
 import Lifelines from "../components/lifelines/Lifelines";
-import QuitButton from "../components/game/QuitButton";
 import QuitGame from "../components/game/QuitGame";
 import Loader from "../components/game/Loader";
-import LifelinesButton from "../components/lifelines/LifelinesButton";
+import ActionButtons from "../components/game/ActionButtons";
+
 import "../styles/Game.css";
-import { useEffect } from "react";
 
 const Game = () => {
   const [state, setState] = useContext(Context);
@@ -232,14 +231,6 @@ const Game = () => {
       });
   }, [setQuestionDifficulty, questionNumber, setGuaranteedPrize, setState]);
 
-  const handleQuitBtn = () => {
-    if (confirmed) return;
-    setState({
-      ...state,
-      quitGame: true,
-    });
-  };
-
   const handleCorrectness = () => {
     if (correctAnswer === userAnswer) {
       if (questionNumber === 12) return handleWinner();
@@ -269,10 +260,7 @@ const Game = () => {
       {loading ? <Loader /> : null}
       {playerName && question ? null : <Player startGame={startGame} />}
       <div className="game">
-        <div className="buttons--container">
-          <QuitButton handleQuitBtn={handleQuitBtn} />
-          <LifelinesButton />
-        </div>
+        <ActionButtons />
         <div className="game--interface">
           <Lifelines setQuestionDifficulty={setQuestionDifficulty} />
           <ResultBoard questionNumber={questionNumber} />

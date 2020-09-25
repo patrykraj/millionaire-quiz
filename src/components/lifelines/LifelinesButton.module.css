@@ -1,0 +1,30 @@
+.ToggleLifelines {
+  display: none;
+}
+
+.MaterialIcons {
+  font-size: 2.5rem;
+}
+
+@media (max-width: 750px) {
+  .ToggleLifelines {
+    display: block;
+    position: relative;
+    top: 0;
+    right: 0;
+    margin-bottom: 1rem;
+    background-color: transparent;
+    border: none;
+    color: #efefef;
+    cursor: pointer;
+    transition: all 0.9s;
+  }
+
+  .ActiveLifelinesBtn {
+    transform: rotate(360deg);
+  }
+
+  .ToggleLifelines:focus {
+    outline: none;
+  }
+}

@@ -1,4 +1,4 @@
-div.ranking--container ul.ranking {
+.Ranking {
   min-height: 500px;
   width: 500px;
   list-style: none;
@@ -9,30 +9,30 @@ div.ranking--container ul.ranking {
   border-radius: 10px;
 }
 
-div.ranking--container ul.ranking li {
+.Ranking li {
   position: relative;
   font-weight: bold;
   padding: 1rem 0;
   border-top: 2px solid #efefef;
 }
 
-div.ranking--container ul.ranking li span {
+.Ranking li span {
   position: absolute;
   left: 2rem;
 }
 
 @media (max-width: 750px) {
-  div.page-container.ranking--container {
+  .RankingContainer {
     width: 100%;
   }
 
-  div.ranking--container ul.ranking {
+  .Ranking {
     width: 90%;
     font-size: 1.6rem;
     min-height: 450px;
   }
 
-  div.ranking--container ul.ranking li span {
+  .Ranking li span {
     left: 1rem;
   }
 }

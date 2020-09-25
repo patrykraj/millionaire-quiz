@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Context } from "../../context/Context";
 
-import "../../styles/Player.css";
+import classes from "./Player.module.css";
 
 const Player = ({ startGame }) => {
   const [state, setState] = useContext(Context);
@@ -20,15 +20,15 @@ const Player = ({ startGame }) => {
   };
 
   return (
-    <div className="player--container">
-      <form className="player--form" onSubmit={prevent}>
-        <label className="player--label" htmlFor="player">
+    <div className={classes.PlayerContainer}>
+      <form className={classes.PlayerForm} onSubmit={prevent}>
+        <label className={classes.PlayerLabel} htmlFor="player">
           Set Player Name
         </label>
-        <div className="input--container">
+        <div className={classes.InputContainer}>
           <input
             style={wrongInput ? { border: "2px solid crimson" } : null}
-            className="player--input"
+            className={classes.PlayerInput}
             id="player"
             type="text"
             placeholder="Player Name"
@@ -37,7 +37,7 @@ const Player = ({ startGame }) => {
             onChange={setPlayerName}
           />
           {wrongInput ? (
-            <span className="invalid--input">Min. 3 characters</span>
+            <span className={classes.InvalidInput}>Min. 3 characters</span>
           ) : null}
         </div>
         <button

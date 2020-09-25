@@ -1,4 +1,4 @@
-ul.menu--links {
+.MenuLinks {
   position: relative;
   flex-grow: 1;
   padding: 0;
@@ -9,7 +9,7 @@ ul.menu--links {
   max-width: 900px;
 }
 
-ul.menu--links .link {
+.Link {
   padding: 1rem;
   color: #fff;
   text-transform: uppercase;
@@ -19,13 +19,13 @@ ul.menu--links .link {
   transition: 0.3s all;
 }
 
-ul.menu--links .link:hover {
+.Link:hover {
   background-color: crimson;
   transform: scale(1.1);
 }
 
 @media (max-width: 900px) {
-  ul.menu--links {
+  .MenuLinks {
     overflow: hidden;
   }
 }

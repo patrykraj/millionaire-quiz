@@ -1,4 +1,4 @@
-div.player--container {
+.PlayerContainer {
   height: 100%;
   width: 100%;
   display: flex;
@@ -10,7 +10,7 @@ div.player--container {
   overflow: hidden;
 }
 
-form.player--form {
+.PlayerForm {
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -18,20 +18,20 @@ form.player--form {
   text-align: center;
 }
 
-form.player--form > * {
+.PlayerForm > * {
   margin: 1rem 0;
 }
 
-form.player--form div.input--container {
+.InputContainer {
   position: relative;
 }
 
-form.player--form label.player--label {
+.PlayerLabel {
   font-size: 2rem;
   font-weight: bold;
 }
 
-form.player--form input.player--input {
+.PlayerInput {
   font-size: 1.1rem;
   padding: 0.5rem 0.3rem;
   margin-right: 1rem;
@@ -39,7 +39,7 @@ form.player--form input.player--input {
   transition: 0.3s all;
 }
 
-form.player--form span.invalid--input {
+.InvalidInput {
   position: absolute;
   top: 25%;
   margin: 0;
@@ -49,18 +49,18 @@ form.player--form span.invalid--input {
 }
 
 @media (max-width: 500px) {
-  form.player--form span.invalid--input {
+  .InvalidInput {
     position: relative;
     display: block;
   }
 }
 
 @media (max-width: 400px) {
-  div.player--container {
+  .PlayerContainer {
     align-items: initial;
   }
 
-  form.player--form {
+  .PlayerForm {
     margin-top: calc(50vh - 30%);
   }
 }

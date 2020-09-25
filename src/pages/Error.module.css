@@ -1,0 +1,13 @@
+.ErrorContainer {
+  flex-direction: column;
+}
+
+.ErrorHandlerHeader {
+  font-size: 3rem;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.ErrorHandlerCaption {
+  font-size: 2rem;
+}

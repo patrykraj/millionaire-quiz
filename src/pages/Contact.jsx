@@ -1,17 +1,19 @@
 import React from "react";
-import "../styles/Contact.css";
+import classes from "./Contact.module.css";
 
 import { AiFillGithub, AiFillLinkedin, AiOutlineMail } from "react-icons/ai";
 
 const Contact = () => {
   return (
-    <div className="contact--container page-container">
-      <h2 className="contact-header">Contact me and check out my work:</h2>
-      <div className="contact-links-container">
+    <div className={`${classes.ContactContainer} page-container`}>
+      <h2 className={classes.ContactHeader}>
+        Contact me and check out my work:
+      </h2>
+      <div className={classes.ContactLinksContainer}>
         <li>
           <a
             href="https://github.com/patrykraj"
-            className="contact-link"
+            className={classes.ContactLink}
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -24,7 +26,7 @@ const Contact = () => {
         <li>
           <a
             href="https://linkedin.com/in/patryk-krajewski-9997071b4"
-            className="contact-link"
+            className={classes.ContactLink}
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -37,7 +39,7 @@ const Contact = () => {
         <li>
           <a
             href="mailto:patrykraj@interia.pl"
-            className="contact-link"
+            className={classes.ContactLink}
             target="_blank"
             rel="noopener noreferrer"
           >

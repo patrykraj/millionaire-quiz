@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { Context } from "../../context/Context";
 
 import Answer from "./Answer";
-import "../../styles/Question.css";
+import classes from "./Question.module.css";
 
 const Question = (props) => {
   const [state, setState] = useContext(Context);
@@ -48,11 +48,11 @@ const Question = (props) => {
   return (
     <div className="question--container">
       <div className="question--box">
-        <p className="question quest">{question}</p>
+        <p className={`question ${classes.Quest}`}>{question}</p>
       </div>
       <div className="answers--container">
-        <div className="answer--row">{answers1}</div>
-        <div className="answer--row">{answers2}</div>
+        <div className={classes.AnswerRow}>{answers1}</div>
+        <div className={classes.AnswerRow}>{answers2}</div>
       </div>
     </div>
   );

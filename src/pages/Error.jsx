@@ -1,11 +1,12 @@
 import React from "react";
-import "../styles/Error.css";
+
+import classes from "./Error.module.css";
 
 const Contact = () => {
   return (
-    <div className="error--container page-container">
-      <h2 className="error--handler__header">Error 404</h2>
-      <h3 className="error--handler__caption">not found</h3>
+    <div className={`${classes.ErrorContainer} page-container`}>
+      <h2 className={classes.ErrorHandlerHeader}>Error 404</h2>
+      <h3 className={classes.ErrorHandlerCaption}>not found</h3>
     </div>
   );
 };

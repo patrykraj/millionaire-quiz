@@ -1,0 +1,31 @@
+.ButtonsContainer {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  overflow: hidden;
+}
+
+.QuitBtn {
+  position: relative;
+  align-self: flex-start;
+  top: 0;
+  left: 0;
+  margin-bottom: 1rem;
+  background-color: transparent;
+  border: 2px solid #efefef;
+  border-radius: 25px;
+  padding: 0.3rem 1.5rem;
+  color: #efefef;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.QuitBtn:hover {
+  background-color: rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 10px black;
+}
+
+.MaterialIcon {
+  transform: rotate(-180deg);
+  font-size: 2rem;
+}

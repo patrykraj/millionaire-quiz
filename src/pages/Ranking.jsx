@@ -1,5 +1,6 @@
 import React from "react";
-import "../styles/Ranking.css";
+
+import classes from "./Ranking.module.css";
 
 const Contact = () => {
   const arr = JSON.parse(localStorage.getItem("arr")) || [];
@@ -11,8 +12,8 @@ const Contact = () => {
   ));
 
   return (
-    <div className="ranking--container page-container">
-      <ul className="ranking">
+    <div className={`${classes.RankingContainer} page-container`}>
+      <ul className={classes.Ranking}>
         <h2>TOP 5 RANK</h2>
         {ranking}
       </ul>

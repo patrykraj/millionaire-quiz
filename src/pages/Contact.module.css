@@ -1,13 +1,13 @@
-div.contact--container.page-container {
+.ContactContainer {
   flex-direction: column;
 }
 
-div.contact--container.page-container h2.contact-header {
+.ContactHeader {
   font-size: 2rem;
   text-align: center;
 }
 
-div.contact--container .contact-links-container {
+.ContactLinksContainer {
   list-style: none;
   display: flex;
   justify-content: center;
@@ -17,7 +17,7 @@ div.contact--container .contact-links-container {
   padding: 0;
 }
 
-div.contact--container .contact-link {
+.ContactLink {
   display: flex;
   align-items: center;
   text-decoration: none;
@@ -26,12 +26,9 @@ div.contact--container .contact-link {
   margin: 0.7rem 0;
 }
 
-div.contact--container span {
+.ContactContainer span {
   display: flex;
   align-items: center;
   font-size: 2rem;
   margin-right: 1rem;
-}
-
-@media (max-width: 750px) {
 }

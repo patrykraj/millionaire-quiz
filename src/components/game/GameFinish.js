@@ -1,6 +1,8 @@
 import React, { useContext } from "react";
 import { Context } from "../../context/Context";
 
+import classes from "../questions/Question.module.css";
+
 const GameFinish = ({ shuffleAnswers, replaceErrors }) => {
   const [state, setState] = useContext(Context);
 
@@ -70,7 +72,9 @@ const GameFinish = ({ shuffleAnswers, replaceErrors }) => {
     <>
       <h3>Game over!</h3>
       <h4>
-        Congratulations {name}, you won ${prize}.
+        {prize
+          ? `Congratulations ${name}, you won ${prize}.`
+          : `Unfortunately, you did not win anything.`}
       </h4>
       <p>Would you like to start again?</p>
     </>
@@ -87,17 +91,20 @@ const GameFinish = ({ shuffleAnswers, replaceErrors }) => {
   return (
     <div className="gameOver--container fullscreen">
       <div className="submit--answer">
-        <div className="submit quest">{gameOver ? loss : win}</div>
+        <div className={`submit ${classes.Quest}`}>{gameOver ? loss : win}</div>
       </div>
-      <div className="answer--row">
-        <div className="answer--box">
-          <button onClick={() => reset()} className="answer quest">
+      <div className={classes.AnswerRow}>
+        <div className={classes.AnswerBox}>
+          <button
+            onClick={() => reset()}
+            className={`${classes.Answer} ${classes.Quest}`}
+          >
             Yes
           </button>
         </div>
-        <div className="answer--box">
+        <div className={classes.AnswerBox}>
           <a href="/">
-            <button className="answer quest">No</button>
+            <button className={`${classes.Answer} ${classes.Quest}`}>No</button>
           </a>
         </div>
       </div>

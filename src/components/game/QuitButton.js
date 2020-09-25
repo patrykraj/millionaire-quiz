@@ -1,10 +1,26 @@
-import React from "react";
-import "../../styles/ActionButtons.css";
+import React, { useContext } from "react";
+import { Context } from "../../context/Context";
 
-const QuitButton = props => {
+import classes from "./QuitButton.module.css";
+
+const QuitButton = () => {
+  const [state, setState] = useContext(Context);
+
+  const { confirmed } = state;
+
+  const handleQuitBtn = () => {
+    if (confirmed) return;
+    setState({
+      ...state,
+      quitGame: true,
+    });
+  };
+
   return (
-    <button className="quit--btn" onClick={props.handleQuitBtn}>
-      <span className="material-icons">exit_to_app</span>
+    <button className={classes.QuitBtn} onClick={handleQuitBtn}>
+      <span className={`${classes.MaterialIcon} material-icons`}>
+        exit_to_app
+      </span>
     </button>
   );
 };

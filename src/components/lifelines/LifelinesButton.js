@@ -1,6 +1,8 @@
 import React, { useContext } from "react";
 import { Context } from "../../context/Context";
 
+import classes from "./LifelinesButton.module.css";
+
 const LifelinesButton = () => {
   const [state, setState] = useContext(Context);
 
@@ -17,12 +19,14 @@ const LifelinesButton = () => {
     <button
       className={
         lifelinesVisible
-          ? "toggle--lifelines active--lifelines__btn"
-          : "toggle--lifelines"
+          ? `${classes.ToggleLifelines} ${classes.ActiveLifelinesBtn}`
+          : classes.ToggleLifelines
       }
       onClick={handleLifelinesVisibility}
     >
-      <span className="material-icons">contact_support</span>
+      <span className={`${classes.MaterialIcons} material-icons`}>
+        contact_support
+      </span>
     </button>
   );
 };

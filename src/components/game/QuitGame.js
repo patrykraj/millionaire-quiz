@@ -1,10 +1,12 @@
 import React, { useContext } from "react";
 import { Context } from "../../context/Context";
 
+import classes from "../questions/Question.module.css";
+
 const QuitGame = () => {
   const [state, setState] = useContext(Context);
 
-  const { questionNumber } = state;
+  const { questionNumber, prize } = state;
 
   const win = [
     0,
@@ -21,7 +23,7 @@ const QuitGame = () => {
     500000,
   ];
 
-  const quit = (gameOver, win = state.prize) => {
+  const quit = (gameOver, win = prize) => {
     setState({
       ...state,
       quitGame: false,
@@ -33,21 +35,24 @@ const QuitGame = () => {
   return (
     <div className="submit--container fullscreen">
       <div className="submit--answer">
-        <p className="submit quest">
+        <p className={`submit ${classes.Quest}`}>
           Are you sure to leave the game with ${win[questionNumber - 1]}?
         </p>
       </div>
-      <div className="answer--row">
-        <div className="answer--box">
+      <div className={classes.AnswerRow}>
+        <div className={classes.AnswerBox}>
           <button
             onClick={() => quit(true, win[questionNumber - 1])}
-            className="answer quest"
+            className={`${classes.Answer} ${classes.Quest}`}
           >
             Yes
           </button>
         </div>
-        <div className="answer--box">
-          <button onClick={() => quit(false)} className="answer quest">
+        <div className={classes.AnswerBox}>
+          <button
+            onClick={() => quit(false)}
+            className={`${classes.Answer} ${classes.Quest}`}
+          >
             No
           </button>
         </div>

@@ -9,7 +9,6 @@ import Ranking from "./Ranking.jsx";
 import About from "./About.jsx";
 import Contact from "./Contact.jsx";
 import Error from "./Error.jsx";
-import "../styles/Quiz.css";
 
 const Quiz = () => {
   let vh = window.innerHeight * 0.01;

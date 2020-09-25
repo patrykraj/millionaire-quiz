@@ -1,17 +1,18 @@
 import React from "react";
 import Menu from "../components/Menu";
-import "../styles/Home.css";
+
+import classes from "./Home.module.css";
 
 function Home() {
   return (
-    <main className="homePage">
-      <header className="header">
+    <main className={classes.HomePage}>
+      <header className={classes.Header}>
         <h1>Millionaire Quiz</h1>
       </header>
-      <nav className="nav">
+      <nav>
         <Menu />
       </nav>
-      <footer className="footer">
+      <footer>
         <p>2020 created by Patrykraj</p>
       </footer>
     </main>

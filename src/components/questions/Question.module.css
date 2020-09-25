@@ -1,4 +1,4 @@
-.quest {
+.Quest {
   text-align: center;
   padding: 1rem 1rem;
   width: 100%;
@@ -11,37 +11,37 @@
   transition: 0.2s all;
 }
 
-div.answer--row {
+.AnswerRow {
   display: flex;
 }
 
-div.answer--box {
+.AnswerBox {
   flex: 1;
 }
 
-div.answer--box button.selected--answer {
+.SelectedAnswer {
   background-color: orange;
 }
 
-div.answer--box button.answer:hover {
+.Answer:hover {
   background-color: orange;
   cursor: pointer;
 }
 
-div.answer--box button.correct--answer {
+.CorrectAnswer {
   background-color: #2ecc71;
 }
 
-div.answer--box button.answer {
+.Answer {
   text-align: left;
 }
 
-div.answer--box button.answer span.text__orange {
+.TextOrange {
   color: gold;
 }
 
 @media (max-width: 600px) {
-  div.answer--row {
+  .AnswerRow {
     display: block;
   }
 }

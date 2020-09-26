@@ -1,6 +1,15 @@
+![Millionaire](https://i.imgur.com/9GaHSho.png)
+
 # MILLIONAIRE QUIZ
 
 MillionaireQuiz is based on a famous TV show. The most challenging part was to create effective but not overpowered lifelines which simulate real life probability of occuring an error. Includes ranking of the best results.
+
+## Tech used:
+
+- React
+- Hooks
+- Context
+- Router
 
 ## Implemented features:
 
